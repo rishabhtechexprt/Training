@@ -16,8 +16,9 @@ function Login() {
   
 
   return (
-    <div className="container">
-      <h1>Login</h1>
+    <div className="d-flex justify-content-center align-items-center min-vh-100">
+    <div className="container w-25 border py-3 px-3">
+      <h2>Login</h2>
       <form>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">
@@ -48,6 +49,9 @@ function Login() {
         </button>
       </form>
     </div>
+  </div>
+  
+
   );
 }
 
