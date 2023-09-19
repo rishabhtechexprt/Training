@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
+
+  const navigate = useNavigate();
+  function handleLogut() {
+    localStorage.clear()
+    navigate('/');
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid d-flex">
+      <div className="container-fluid d-flex align-items-center">
         <Link className="navbar-brand" to="/dashboard">Dashboard</Link> 
         <button
           className="navbar-toggler"
@@ -28,7 +36,16 @@ const Navbar = () => {
 
           
           </ul>
+
         </div>
+        <div className="d-flex me-2">
+
+                 
+                  <p className='mb-0' style={{cursor:'pointer'}} onClick={handleLogut}>Logout</p>  
+                     
+                      
+                   
+                  </div>
       </div>
     </nav>
   );

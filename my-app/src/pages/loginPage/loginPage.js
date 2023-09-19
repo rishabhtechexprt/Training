@@ -22,7 +22,7 @@ function Login() {
 
 
     <div className="container w-25 border py-3 px-3 h-50" style={{backgroundColor:'white'}}>
-      <h2 className='d-flex justify-content-center'> Login</h2>
+      <h2 className='d-flex justify-content-center fw-bold'> Login</h2>
       <form>
         <div className="mb-3">
           <label htmlFor="username" className="form-label fw-bold">
@@ -50,7 +50,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="button" className="btn btn-primary w-100" onClick={handleLogin}>
+        <button type="button" className="btn btn-primary w-100 " onClick={handleLogin}>
           Submit
         </button>
         <p className='d-flex justify-content-center' >Don't have any account?</p>

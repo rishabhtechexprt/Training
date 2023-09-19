@@ -26,23 +26,23 @@ const Dashboard = () => {
   const dataset = [
     {
       Job:'Full stack',
-      month: 'Jan',
+      month: 'Jun',
     },
     {
       Job:'Sales Force',
-      month: 'Jan',
+      month: 'July',
     },
     {
       Job:'Digital Marketing',
-      month: 'Jan',
+      month: 'August',
     },
     {
       Job:'Deployment',
-      month: 'Jan',
+      month: 'September',
     },
     {
       Job:'Staff',
-      month: 'Jan',
+      month: 'October',
     },
    
     
