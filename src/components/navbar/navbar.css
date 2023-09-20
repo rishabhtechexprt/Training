@@ -1,0 +1,36 @@
+*{
+    font-family: sans-serif;
+   
+}
+.nav-main{
+    background-color: rgb(178,177,175);
+}
+
+
+.nav-link{
+    font-size: 18px;
+    color: white;
+
+}
+
+.nav-link:hover{
+    font-size: 18px;
+    color: white;
+
+}
+
+.brand-img{
+    height: 50px;
+    border-radius: 50%;
+}
+
+.list-view{
+    color: white;
+}
+.list-view:hover{
+    color: white;
+}
+.navbar-brand{
+    color: white;
+    padding-left: 10px;
+}
