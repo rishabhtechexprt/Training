@@ -3,19 +3,20 @@ import Navbar from '../components/navbar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tracker from '../components/tracker';
-import Breadindication3 from '../components/breadcrumbs3';
-function DesignationList() {
-  const [Designations, setDesignation] = useState([
-    { id: 1, name: 'Developer', description: 'Information Technology' },
-    { id: 2, name: 'Salesforce', description: 'Sales and admin' },
-    { id: 3, name: 'Finance', description: 'Finance and Accounting' },
-    { id: 4, name: 'Salesforce', description: 'Sales and admin' },
-    { id: 5, name: 'Salesforce', description: 'Sales and admin' },
-    { id: 6, name: 'Salesforce', description: 'Sales and admin' },
-    { id: 7, name: 'Salesforce', description: 'Sales and admin' },
+import Breadindication2 from '../components/breadcrumbs2';
+function DepartmentList() {
+  const [departments, setDepartments] = useState([
+    { id: 1, name: 'HR', description: 'Human Resources' },
+    { id: 2, name: 'HR', description: 'Human Resources' },
+    { id: 3, name: 'HR', description: 'Human Resources' },
+    { id: 4, name: 'IT', description: 'Information Technology' },
+    { id: 5, name: 'IT', description: 'Information Technology' },
+    { id: 6, name: 'IT', description: 'Information Technology' },
+    { id: 7, name: 'Finance', description: 'Finance and Accounting' },
+    { id: 8, name: 'Finance', description: 'Finance and Accounting' },
   ]);
 
-  const [editing, setEditingDepartment] = useState(null);
+  const [editingDepartment, setEditingDepartment] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,41 +28,41 @@ function DesignationList() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const addDesignation = () => {
+  const addDepartment = () => {
     if (formData.name && formData.description) {
-      const newDesignation = {
-        id: Designations.length + 1,
+      const newDepartment = {
+        id: departments.length + 1,
         name: formData.name,
         description: formData.description,
       };
 
-      setDesignation([...Designations, newDesignation]);
+      setDepartments([...departments, newDepartment]);
       setFormData({ name: '', description: '' });
     }
   };
 
-  const deleteDesignation = (id) => {
-    setDesignation(Designations.filter((designation) => designation.id !== id));
+  const deleteDepartment = (id) => {
+    setDepartments(departments.filter((department) => department.id !== id));
   };
 
   return (
     <>
       <Navbar />
-      <Breadindication3 />
+      <Breadindication2 />
       <div className="px-2 py-2">
         <Tracker/>
-        
+       
         <form>
           <div className="row align-items-end px-3">
             <div className="col-md-4 mb-3">
               <label htmlFor="name" className="form-label fw-bold">
-                Designation Name:
+                Department Name:
               </label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                placeholder='Enter Designation name...'
+                placeholder='Enter Department name...'
                 className="form-control"
                 value={formData.name}
                 onChange={handleInputChange}
@@ -85,9 +86,9 @@ function DesignationList() {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={addDesignation}
+                onClick={addDepartment}
               >
-                Add Designation
+                Add Department
               </button>
             </div>
           </div>
@@ -95,26 +96,26 @@ function DesignationList() {
         <div className="container-fluid">
         <div className="row">
         <div className="col-md-12">
-        <table className="table table-striped ">
+        <table className="table table-striped  ">
           <thead className='sticky-top bg-light'>
             <tr>
               <th>ID</th>
-              <th>Designation Name</th>
+              <th>Department Name</th>
               <th>Description</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {Designations.map((designation) => (
-              <tr key={designation.id}>
-                <td>{designation.id}</td>
-                <td>{designation.name}</td>
-                <td>{designation.description}</td>
+            {departments.map((department) => (
+              <tr key={department.id}>
+                <td>{department.id}</td>
+                <td>{department.name}</td>
+                <td>{department.description}</td>
                 <td>
                   <button>
                     <EditIcon />
                   </button>
-                  <button onClick={() => deleteDesignation(designation.id)}>
+                  <button onClick={() => deleteDepartment(department.id)}>
                     <DeleteIcon />
                   </button>
                 </td>
@@ -146,4 +147,4 @@ function DesignationList() {
   );
 }
 
-export default DesignationList;
+export default DepartmentList;

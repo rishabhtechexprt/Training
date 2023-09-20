@@ -32,35 +32,38 @@ function EmployeeDetails() {
   };
 
   return (
-    <div className='px-2 py-2'>
-      <h2>Employee Details</h2>
+   <>
+      <h2 className='px-3'>Employee Details</h2>
    
       <form>
-      <div className='row align-items-end '>
+      <div className='row align-items-end px-3 '>
+       
         <div className=" col-md-3 ">
-          <label htmlFor="name" className="form-label">Name:</label>
+          <label htmlFor="name" className="form-label fw-bold">Name:</label>
           <input
             type="text"
             id="name"
             name="name"
+            placeholder='Enter name...'
             className="form-control"
             value={formData.name}
             onChange={handleInputChange}
           />
         </div>
         <div className="col-md-3 ">
-          <label htmlFor="designation" className="form-label">Designation:</label>
+          <label htmlFor="designation" className="form-label fw-bold">Designation:</label>
           <input
             type="text"
             id="designation"
             name="designation"
+            placeholder='Enter Designation...'
             className="form-control"
             value={formData.designation}
             onChange={handleInputChange}
           />
         </div>
         <div className="col-md-3 ">
-          <label htmlFor="status" className="form-label">Status:</label>
+          <label htmlFor="status" className="form-label fw-bold">Status:</label>
           <select
             id="status"
             name="status"
@@ -73,14 +76,14 @@ function EmployeeDetails() {
             <option value="On Leave">On Leave</option>
           </select>
         </div>
-      <div className='col-md-2 '>
+      <div className='col-md-3 '>
         <button type="button" className="btn btn-primary" onClick={saveChanges}>
           Save Changes
         </button>
         </div>
         </div>
       </form>
-      </div>
+      </>
    
   );
 }

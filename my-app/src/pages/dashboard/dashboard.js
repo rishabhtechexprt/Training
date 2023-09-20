@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BarChart,PieChart } from "@mui/x-charts";
-import Navbar from "../Navbar/navbar";
+import Navbar from "../components/navbar";
 
 
 const Dashboard = () => {
@@ -17,38 +17,64 @@ const Dashboard = () => {
   const chartSetting = {
     xAxis: [
       {
-        label: 'month',
+        label: 'Jobs',
       },
     ],
     width: 500,
     height: 400,
   };
-  const dataset = [
-    {
-      Job:'Full stack',
-      month: 'Jun',
-    },
-    {
-      Job:'Sales Force',
-      month: 'July',
-    },
-    {
-      Job:'Digital Marketing',
-      month: 'August',
-    },
-    {
-      Job:'Deployment',
-      month: 'September',
-    },
-    {
-      Job:'Staff',
-      month: 'October',
-    },
-   
+ 
+const dataset = [
+  {
     
-  ];
+    Jobs: 21,
+    month: 'Jan',
+  },
+  {
+    
+    Jobs: 28,
+    month: 'Fev',
+  },
+  {
+   
+    Jobs: 41,
+    month: 'Mar',
+  },
+  {
+    
+    Jobs: 73,
+    month: 'Apr',
+  },
+  {
+   
+    Jobs: 99,
+    month: 'May',
+  },
+  {
+   
+    Jobs: 144,
+    month: 'June',
+  },
+  {
+    
+    Jobs: 319,
+    month: 'July',
+  },
+  {
+   
+    Jobs: 249,
+    month: 'Aug',
+  },
+  {
+   
+    Jobs: 131,
+    month: 'Sept',
+  },
+ 
+ 
+];
   
-  const valueFormatter = (value) => `${value}mm`;
+  const valueFormatter = (value) => `${value}`;
 
   return (
     <>
@@ -154,11 +180,10 @@ const Dashboard = () => {
     </div>
   </div>
   <div >
-     <BarChart
-
+  <BarChart
       dataset={dataset}
-      yAxis={[{ scaleType: 'band', dataKey: 'Job' }]}
-      series={[{ dataKey: 'seoul', label: 'Top Hiring', valueFormatter }]}
+      yAxis={[{ scaleType: 'band', dataKey: 'month' }]}
+      series={[{ dataKey: 'Jobs', label: 'Top Hiring', valueFormatter }]}
       layout="horizontal"
       {...chartSetting}
     />

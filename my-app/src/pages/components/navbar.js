@@ -6,13 +6,15 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   function handleLogut() {
-    localStorage.clear()
-    navigate('/');
+  navigate('/');
   }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid d-flex align-items-center">
+      <img src='./assets/bytesfarms.jfif'
+      style={{width:'65px',height:'55px',marginRight:'10px'}}
+      alt='company name' />
         <Link className="navbar-brand" to="/dashboard">Dashboard</Link> 
         <button
           className="navbar-toggler"
@@ -33,7 +35,9 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/department">Department </Link> 
             </li>
-
+            <li className="nav-item">
+              <Link className="nav-link" to="/designation">Designation </Link> 
+            </li>
           
           </ul>
 

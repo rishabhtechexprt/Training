@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,6 +14,16 @@ function Login() {
     if (username === 'admin' && password === 'password') {
         navigate('/dashboard'); 
     }
+    else{
+      toast.error('Invalid username and password', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
   };
 
 
@@ -21,7 +33,14 @@ function Login() {
  
 
 
-    <div className="container w-25 border py-3 px-3 h-50" style={{backgroundColor:'white'}}>
+    <div className="container w-25 border py-3 px-3 h-50" style={{backgroundColor:'white',borderRadius:'10px'}}>
+      <div className='d-flex justify-content-center'>
+      <img src='./assets/bytesfarms.jfif'
+   
+   style={{width:'65px',height:'65px'}}
+   alt='company name' />
+      </div>
+     
       <h2 className='d-flex justify-content-center fw-bold'> Login</h2>
       <form>
         <div className="mb-3">
@@ -56,6 +75,7 @@ function Login() {
         <p className='d-flex justify-content-center' >Don't have any account?</p>
       </form>
     </div>
+    <ToastContainer />  
   </div>
   
 
