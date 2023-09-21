@@ -4,8 +4,12 @@ import EmployeeDetails from './EmployeeDetails';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Breadindication from '../components/breadcrumb';
-import './employeeList.css';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
+import { Dialog, DialogTitle, DialogContent, TextField, Button } from '@mui/material';
 function EmployeeList() {
   const [employees, setEmployees] = useState([
     { id: 1, name: 'John Doe',department: 'HR', designation: 'Manager',status:'Active' },
@@ -17,11 +21,13 @@ function EmployeeList() {
     { id: 7, name: 'John Doe',department: 'HR', designation: 'Manager',status:'Active' },
     { id: 8, name: 'John Doe',department: 'HR', designation: 'Manager',status:'Active' },
   ]);
-
+  const [openDialog, setOpenDialog] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
 
   const [formData, setFormData] = useState({
+    id:'',
     name: '',
+    deparment:'',
     designation: '',
   });
 
@@ -30,22 +36,32 @@ function EmployeeList() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const addEmployee = () => {
-    if (formData.name && formData.designation) {
-      const newEmployee = {
-        id: employees.length + 1,
-        name: formData.name,
-        designation: formData.designation,
-      };
-
-      setEmployees([...employees, newEmployee]);
-      setFormData({ name: '', designation: '' });
-    }
+  const navigate = useNavigate();
+  const handleAddEmployee = () => {
+    setOpenDialog(true);
   };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleSaveEmployee = () => {
+    
+    setEmployees([...employees, formData]);
+    setOpenDialog(false);
+  };     
 
   const deleteEmployee = (id) => {
     setEmployees(employees.filter((employee) => employee.id !== id));
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <>
@@ -57,46 +73,74 @@ function EmployeeList() {
       
         <h2 className='px-3 mt-3'>Employee List</h2>
         <form>
-            <div className='row align-items-end px-3'>
-          <div className=" col-md-3 mb-3">
-            <label htmlFor="name" className="form-label fw-bold">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder='Enter name...'
-              className="form-control"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="designation" className="form-label fw-bold">
-              Designation:
-            </label>
-            <input
-              type="text"
-              id="designation"
-              placeholder='Enter Designation...'
-              name="designation"
-              className="form-control"
-              value={formData.designation}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className='col-md-2 mb-3 '>
+            <div className='row align-items-end justify-content-end px-3'>
+          
+          <div className='col-md-2 mb-1 d-flex justify-content-end '>
           <button
             type="button"
-            className="btn btn-primary"
-            onClick={addEmployee}
+            className="btn btn-primary w-75"
+            onClick={handleAddEmployee}
           >
             Add Employee
           </button>
           </div>
           </div>
         </form>
+        <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Add Employee</DialogTitle>
+        <DialogContent>
+        <Grid container spacing={2} style={{marginTop:'10px'}} >
+        <Grid item   md={12}>
+          <TextField
+            label="Name"
+            name="name"
+            
+            value={formData.name}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+          <Grid item   md={12}>
+          <TextField
+            label="Designation"
+            name="designation"
+            value={formData.designation}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+          <Grid item  md={12}>
+          <TextField
+            label="Department"
+            name="department"
+            value={formData.deparment}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+          <Grid item md={12}>
+          <TextField
+            label="Status"
+            name="status"
+            value={formData.status}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+          <Grid item xs={12}  md={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSaveEmployee}
+          >
+            Save
+          </Button>
+          </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    
+
 
         <div className="container-fluid table-responsive">
     
@@ -122,12 +166,23 @@ function EmployeeList() {
                 <td>{employee.designation}</td>
                 <td>{employee.status}</td>
                 <td>
-                  <button>
-                    <EditIcon />
-                  </button>
-                  <button onClick={() => deleteEmployee(employee.id)}>
-                    <DeleteIcon />
-                  </button>
+                <IconButton
+                                                               
+                                                                aria-haspopup="true"
+                                                                onClick={handleMenuClick}
+                                                            >
+                                                                <MoreVertIcon />
+                                                            </IconButton>
+                                                            <Menu
+                                                            
+                                                                anchorEl={anchorEl}
+                                                                keepMounted
+                                                                open={Boolean(anchorEl)}
+                                                                onClose={handleMenuClose}
+                                                            >
+                                                                <MenuItem >Edit</MenuItem>
+                                                                <MenuItem onClick={deleteEmployee} >Delete</MenuItem>
+                                                            </Menu>
                 </td>
               </tr>
             ))}

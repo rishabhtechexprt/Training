@@ -4,6 +4,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tracker from '../components/tracker';
 import Breadindication3 from '../components/breadcrumbs3';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import Grid from '@mui/material/Grid';
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
+import { Dialog, DialogTitle, DialogContent, TextField, Button } from '@mui/material';
+
 function DesignationList() {
   const [Designations, setDesignation] = useState([
     { id: 1, name: 'Developer', description: 'Information Technology' },
@@ -14,8 +21,8 @@ function DesignationList() {
     { id: 6, name: 'Salesforce', description: 'Sales and admin' },
     { id: 7, name: 'Salesforce', description: 'Sales and admin' },
   ]);
-
-  const [editing, setEditingDepartment] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [editing, setEditingDesignation] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,22 +34,33 @@ function DesignationList() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const addDesignation = () => {
-    if (formData.name && formData.description) {
-      const newDesignation = {
-        id: Designations.length + 1,
-        name: formData.name,
-        description: formData.description,
-      };
-
-      setDesignation([...Designations, newDesignation]);
-      setFormData({ name: '', description: '' });
-    }
+  const handleAddDesignation = () => {
+    setOpenDialog(true);
   };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleSaveDesignation = () => {
+    
+    setDesignation([...Designations, formData]);
+    setOpenDialog(false);
+  };     
 
   const deleteDesignation = (id) => {
     setDesignation(Designations.filter((designation) => designation.id !== id));
   };
+
+
+  
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <>
@@ -52,46 +70,55 @@ function DesignationList() {
         <Tracker/>
         
         <form>
-          <div className="row align-items-end px-3">
-            <div className="col-md-4 mb-3">
-              <label htmlFor="name" className="form-label fw-bold">
-                Designation Name:
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder='Enter Designation name...'
-                className="form-control"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="col-md-4 mb-3">
-              <label htmlFor="description" className="form-label fw-bold">
-                Description:
-              </label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder='Enter Description...'
-                className="form-control"
-                value={formData.description}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="col-md-2 mb-3">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={addDesignation}
-              >
-                Add Designation
-              </button>
-            </div>
+            <div className='row align-items-end justify-content-end px-3'>
+          
+          <div className='col-md-2 mb-1 d-flex justify-content-end '>
+          <button
+            type="button"
+            className="btn btn-primary w-75"
+            onClick={handleAddDesignation}
+          >
+            Add Designation
+          </button>
+          </div>
           </div>
         </form>
+        <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Add Designation</DialogTitle>
+        <DialogContent>
+        <Grid container spacing={2} style={{marginTop:'10px'}} >
+        <Grid item   md={12}>
+          <TextField
+            label=" Designation Name"
+            name=" Designation name"
+            
+            value={formData.name}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+          <Grid item   md={12}>
+          <TextField
+            label="Description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            fullWidth
+          />
+          </Grid>
+         
+          <Grid item xs={12}  md={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSaveDesignation}
+          >
+            Save
+          </Button>
+          </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
         <div className="container-fluid">
         <div className="row">
         <div className="col-md-12">
@@ -111,12 +138,23 @@ function DesignationList() {
                 <td>{designation.name}</td>
                 <td>{designation.description}</td>
                 <td>
-                  <button>
-                    <EditIcon />
-                  </button>
-                  <button onClick={() => deleteDesignation(designation.id)}>
-                    <DeleteIcon />
-                  </button>
+                <IconButton
+                                                               
+                                                               aria-haspopup="true"
+                                                               onClick={handleMenuClick}
+                                                           >
+                                                               <MoreVertIcon />
+                                                           </IconButton>
+                                                           <Menu
+                                                           
+                                                               anchorEl={anchorEl}
+                                                               keepMounted
+                                                               open={Boolean(anchorEl)}
+                                                               onClose={handleMenuClose}
+                                                           >
+                                                               <MenuItem >Edit</MenuItem>
+                                                               <MenuItem >Delete</MenuItem>
+                                                           </Menu>
                 </td>
               </tr>
             ))}

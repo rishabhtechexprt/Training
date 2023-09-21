@@ -76,8 +76,8 @@ function EmployeeDetails() {
             <option value="On Leave">On Leave</option>
           </select>
         </div>
-      <div className='col-md-3 '>
-        <button type="button" className="btn btn-primary" onClick={saveChanges}>
+      <div className='col-md-3 d-flex justify-content-end '>
+        <button type="button" className="btn btn-primary w-50" onClick={saveChanges}>
           Save Changes
         </button>
         </div>

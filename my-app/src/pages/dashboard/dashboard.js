@@ -79,14 +79,14 @@ const dataset = [
   return (
     <>
       <Navbar />
-      <div className="container-fluid h-100 mt-3">
+      <div className="container-fluid h-100 mt-2">
  
         <div className="row ">
-          <div className="col-md-4 mb-3">
+          <div className="col-md-4 mb-1 p-2">
             <div
-              className="dashboard-box h-100 border  p-3"
+              className="dashboard-box h-100 border  p-3 border-bottom-dashes border-2  border-dark-subtle"
               onClick={handleClick}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer",backgroundColor:'#f4f4f4' }}
             >
               <h4>Technical hiring</h4>
               <div className="d-flex align-items-center">
@@ -109,11 +109,11 @@ const dataset = [
               </div>
             </div>
           </div>
-          <div className="col-md-4 mb-3">
+          <div className="col-md-4 mb-1 p-2">
             <div
-              className="dashboard-box h-100 border  p-3"
+              className="dashboard-box h-100 border  p-3 border-bottom-dashes border-2  border-dark-subtle"
               onClick={handleClick}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer",backgroundColor:'#f4f4f4' }}
             >
               <h4> Non-Technical hiring</h4>
               <div className="d-flex align-items-center">
@@ -136,8 +136,8 @@ const dataset = [
               </div>
             </div>
           </div>
-          <div className="col-md-4 mb-3">
-            <div className="dashboard-box h-100 border  p-3">
+          <div className="col-md-4 mb-1 p-2 ">
+            <div className="dashboard-box h-100 border  p-3 border-bottom-dashes border-2  border-dark-subtle" style={{backgroundColor:'#f4f4f4'}}>
               <h4>Recruitment Cost</h4>
               <PieChart
                 series={[
@@ -156,8 +156,8 @@ const dataset = [
           </div>
         </div>
         <div className="row ">
-          <div className="col-md-6 mb-3">
-            <div className="dashboard-box h-100 border p-3">
+          <div className="col-md-6 mb-2 p-2">
+            <div className="dashboard-box h-100 border p-3 border-bottom-dashes border-2  border-dark-subtle" style={{backgroundColor:'#f4f4f4'}}>
               <h4>Current Hiring</h4>
               <BarChart
                 xAxis={[{ scaleType: "band", data: ["August", "September"] }]}
@@ -167,9 +167,9 @@ const dataset = [
               />
             </div>
           </div>
-          <div class="col-md-6 mb-3 d-flex flex-column align-items-center justify-content-center">
-  <div class="card w-100">
-    <div class="card-body">
+          <div class="col-md-6 mb-2 p-2 d-flex flex-column align-items-center justify-content-center">
+  <div class="card w-100 border-bottom-dashes border-2  border-dark-subtle">
+    <div class="card-body border-bottom-dashes border-2  border-dark-subtle">
       <h5 class="card-title">Top Hiring</h5>
       <ul class="list-group">
         <li class="list-group-item">Fullstack</li>
@@ -179,7 +179,7 @@ const dataset = [
       </ul>
     </div>
   </div>
-  <div >
+  <div  >
   <BarChart
       dataset={dataset}
       yAxis={[{ scaleType: 'band', dataKey: 'month' }]}

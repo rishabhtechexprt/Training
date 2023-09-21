@@ -7,7 +7,9 @@ import Dashboard from './pages/dashboard/dashboard';
 import EmployeeList from './pages/employeeList/EmployeeList';
 import Department from './pages/department/Department'
 import Designation from './pages/designation/designationList'
+
 import './App.css'
+
 function App() {
   return (
     <>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/department" element={<Department/>} />
         <Route path="/employeelist" element={<EmployeeList />} />
         <Route path="/designation" element={<Designation />} />
+       
         </Routes>
     
     </Router>
